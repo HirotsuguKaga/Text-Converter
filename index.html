@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="content-style-type" content="text/css">
+
+<style type="text/css">
+<!--
+*{margin:auto;font-family:'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;}
+.main{margin:0 auto;width:90%}
+.menu{float:left;padding:0.1em;margin:0.1em;border:solid 1px #eee}
+a{font-weight:900;text-decoration:none;color:#12b}
+.menu2{display:none}
+.case{clear:left;margin:0.5em}
+label{font-size:0.8em}
+H1{background:#141;color:#fff;padding-top:35;line-height:110%;text-align:center;font-weight:900;text-shadow:0 1px 1px #999,1px 0 1px #aaa}
+#Rep textarea{height:1.5em}
+#Tabtex{height:1em;overflow:hidden;border-color:#bbb}
+-->
+</style>
+       <title>CLARK WEBSITE / TEXT CONVERTER</title>
+</head>
+<body>
+<h1><br>TEXT CONVERTER</h1>
+<br><br>
+
+<div class="main">
+<script type="text/javascript"><!--
+
+function convert(obj){//変換処理を開始
+var i = document.forms.INPUT3.elements.INPUT4.value;
+var j ="";
+
+	if (document.forms.INPUT3.elements.SPACE.checked){//全ての空白を削除
+	i = i.replace(/ |　|\t/g, "");}
+	if (document.forms.INPUT3.elements.SPACE2.checked){//行頭行末の空白を削除
+	i = i.replace(/^\s+|\s+$/g, "");
+	i = i.replace(/　* *\t*\n\t* *　*/g, "\n");
+	i = i.replace(/\t* *　*\n　* *\t*/g, "\n");}
+	if (document.forms.INPUT3.elements.SPACE3.checked){//連続する空白を削除
+	i = i.replace(/ +/g, " ");
+	i = i.replace(/\t+/g, "\t");
+	i = i.replace(/　+/g, "　");}
+	if (document.forms.INPUT3.elements.SPACE7.checked){//タブを削除
+	i = i.replace(/\t/g,"");}
+	if (document.forms.INPUT3.elements.SPACE6.checked){//空白を拡張
+	i = i.replace(/( +)/g, "$1 ");
+		i = i.replace(/(\t+)/g, "$1\t");
+	i = i.replace(/(　+)/g, "$1　");}
+
+	if (document.forms.INPUT3.elements.SPACE5.checked){//タブを半角空白化
+	i = i.replace(/\t/g, " ");}
+	if (document.forms.INPUT3.elements.Tab.checked){//半空をタブ化
+	i = i.replace(/ /g, "\t");}
+	if (document.forms.INPUT3.elements.SPACE4.checked){//全角空白を半角空白化
+	i = i.replace(/　/g, " ");}
+	if (document.forms.INPUT3.elements.SPACE8.checked){//&nbsp化
+	i = i.replace(/ /g,"&nbsp;");}
+	if (document.forms.INPUT3.elements.Tabtex.value!=""){//タブを文字列に変換
+	var tabtex = document.forms.INPUT3.elements.Tabtex.value;
+	i = i.replace(/\t/g,tabtex);}
+
+	if (document.forms.INPUT3.elements.CRLF.checked){//全ての改行を削除
+	i = i.replace(/\r|\n/g, "");}
+	if (document.forms.INPUT3.elements.CRLF2.checked){//空の行を削除
+	i = i.replace(/\n+/g, "\n");
+	i = i.replace(/\r+/g, "\r");}
+	if (document.forms.INPUT3.elements.CRLF3.checked){//行間を拡げる
+	i = i.replace(/\r/g, "\r\r");
+	i = i.replace(/\n/g, "\n\n");}
+
+	if (document.forms.INPUT3.elements.HF.checked){//アルファベットを半角化
+	i=i.replace(/Ａ/g,'A');i=i.replace(/Ｂ/g,'B');i=i.replace(/Ｃ/g,'C');i=i.replace(/Ｄ/g,'D');i=i.replace(/Ｅ/g,'E');i=i.replace(/Ｆ/g,'F');i=i.replace(/Ｇ/g,'G');i=i.replace(/Ｈ/g,'H');i=i.replace(/Ｉ/g,'I');i=i.replace(/Ｊ/g,'J');i=i.replace(/Ｋ/g,'K');i=i.replace(/Ｌ/g,'L');i=i.replace(/Ｍ/g,'M');i=i.replace(/Ｏ/g,'O');i=i.replace(/Ｐ/g,'P');i=i.replace(/Ｑ/g,'Q');i=i.replace(/Ｒ/g,'R');i=i.replace(/Ｓ/g,'S');i=i.replace(/Ｔ/g,'T');i=i.replace(/Ｕ/g,'U');i=i.replace(/Ｖ/g,'V');i=i.replace(/Ｗ/g,'W');i=i.replace(/Ｘ/g,'X');i=i.replace(/Ｙ/g,'Y');i=i.replace(/Ｚ/g,'Z');
+i=i.replace(/ａ/g,'a');i=i.replace(/ｂ/g,'b');i=i.replace(/ｃ/g,'c');i=i.replace(/ｄ/g,'d');i=i.replace(/ｅ/g,'e');i=i.replace(/ｆ/g,'f');i=i.replace(/ｈ/g,'h');i=i.replace(/ｉ/g,'i');i=i.replace(/ｊ/g,'j');i=i.replace(/ｋ/g,'k');i=i.replace(/ｌ/g,'l');i=i.replace(/ｍ/g,'m');i=i.replace(/ｏ/g,'o');i=i.replace(/ｐ/g,'p');i=i.replace(/ｑ/g,'q');i=i.replace(/ｒ/g,'r');i=i.replace(/ｓ/g,'s');i=i.replace(/ｔ/g,'t');i=i.replace(/ｕ/g,'u');i=i.replace(/ｖ/g,'v');i=i.replace(/ｗ/g,'w');i=i.replace(/ｘ/g,'x');i=i.replace(/ｙ/g,'y');i=i.replace(/ｚ/g,'z');i=i.replace(/，/g,',');i=i.replace(/．/g,'.');i=i.replace(/！/g,'!');i=i.replace(/？/g,'?');}
+	if (document.forms.INPUT3.elements.HF2.checked){//数字を半角化
+	i=i.replace(/１/g,'1');i=i.replace(/２/g,'2');i=i.replace(/３/g,'3');i=i.replace(/４/g,'4');i=i.replace(/５/g,'5');i=i.replace(/６/g,'6');i=i.replace(/７/g,'7');i=i.replace(/８/g,'8');i=i.replace(/９/g,'9');i=i.replace(/０/g,'0');}
+	if (document.forms.INPUT3.elements.HF3.checked){//記号を半角化
+i=i.replace(/！/g,'!');i=i.replace(/”/g,'\"');i=i.replace(/～/g,'~');i=i.replace(/｜/g,'|');i=i.replace(/♯/g,'#');i=i.replace(/＃/g,'#');i=i.replace(/－/g,'-');i=i.replace(/＋/g,'+');i=i.replace(/＝/g,'=');i=i.replace(/％/g,'%');;i=i.replace(/＆/g,'&');;i=i.replace(/＄/g,'$');i=i.replace(/”/g,'\"');i=i.replace(/’/g,'\'');i=i.replace(/（/g,'\(');i=i.replace(/）/g,'\)');}
+	if (document.forms.INPUT3.elements.Lower.checked){//小文字化
+	i=i.toLowerCase();}
+	if (document.forms.INPUT3.elements.Upper.checked){//大文字化
+	i=i.toUpperCase();}
+	if (document.forms.INPUT3.elements.Punc.checked){//句読点を変換
+	i=i.replace(/、/g,"，");
+	i=i.replace(/。/g,"．");}
+
+		if (document.forms.INPUT3.elements.META.checked){//メタ文字のエスケープ
+		i=i.replace(/&/g,"&amp;");
+		i=i.replace(/"/g,"&quot;");
+		i=i.replace(/'/g,"&#039;");
+		i=i.replace(/</g,"&lt;");
+		i=i.replace(/>/g,"&gt;");}	
+	if (document.forms.INPUT3.elements.kigo.checked){//記号文字の文字参照
+	i=i.replace(/\ /g,"&nbsp;");
+	i=i.replace(/\!/g,"&iexcl;");
+	i=i.replace(/\￠/g,"&cent;");
+	i=i.replace(/\￡/g,"&pound;");
+	i=i.replace(/\\/g,"&yen;");
+	i=i.replace(/\|/g,"&brvbar;");
+	i=i.replace(/\§/g,"&sect;");
+	i=i.replace(/\¨/g,"&uml;");
+	i=i.replace(/\≪/g,"&laquo;");
+	i=i.replace(/\￢/g,"&not;");
+	i=i.replace(/\R/g,"&reg;");
+	i=i.replace(/\￣/g,"&macr;");
+	i=i.replace(/\°/g,"&deg;");
+	i=i.replace(/\±/g,"&plusmn;");
+	i=i.replace(/\´/g,"&acute;");
+	i=i.replace(/\μ/g,"&micro;");
+	i=i.replace(/\¶/g,"&para;");
+	i=i.replace(/\・/g,"&middot;");
+	i=i.replace(/\，/g,"&cedil;");
+	i=i.replace(/\1/g,"&sup1;");
+	i=i.replace(/\≫/g,"&raquo;");
+	i=i.replace(/\×/g,"&times;");
+	i=i.replace(/\÷/g,"&divide;");
+	i=i.replace(/\"/g,"&quot;");
+	i=i.replace(/\</g,"&lt;");
+	i=i.replace(/\>/g,"&gt;");
+	i=i.replace(/\'/g,"&apos;");
+	i=i.replace(/\‘/g,"&lsquo;");
+	i=i.replace(/\’/g,"&rsquo;");
+	i=i.replace(/\“/g,"&ldquo;");
+	i=i.replace(/\”/g,"&rdquo;");
+	i=i.replace(/\†/g,"&dagger;");
+	i=i.replace(/\‡/g,"&Dagger;");
+	i=i.replace(/\‰/g,"&permil;");
+	i=i.replace(/\Α/g,"&Alpha;");
+	i=i.replace(/\Β/g,"&Beta;");
+	i=i.replace(/\Γ/g,"&Gamma;");
+	i=i.replace(/\Δ/g,"&Delta;");
+	i=i.replace(/\Ε/g,"&Epsilon;");
+	i=i.replace(/\Ζ/g,"&Zeta;");
+	i=i.replace(/\Η/g,"&Eta;");
+	i=i.replace(/\Θ/g,"&Theta;");
+	i=i.replace(/\Ι/g,"&Iota;");
+	i=i.replace(/\Κ/g,"&Kappa;");
+	i=i.replace(/\Λ/g,"&Lambda;");
+	i=i.replace(/\Μ/g,"&Mu;");
+	i=i.replace(/\Ν/g,"&Nu;");
+	i=i.replace(/\Ξ/g,"&Xi;");
+	i=i.replace(/\Ο/g,"&Omicron;");
+	i=i.replace(/\Π/g,"&Pi;");
+	i=i.replace(/\Ρ/g,"&Rho;");
+	i=i.replace(/\Σ/g,"&Sigma;");
+	i=i.replace(/\Τ/g,"&Tau;");
+	i=i.replace(/\Υ/g,"&Upsilon;");
+	i=i.replace(/\Φ/g,"&Phi;");
+	i=i.replace(/\Χ/g,"&Chi;");
+	i=i.replace(/\Ψ/g,"&Psi;");
+	i=i.replace(/\Ω/g,"&Omega;");
+	i=i.replace(/\α/g,"&alpha;");
+	i=i.replace(/\β/g,"&beta;");
+	i=i.replace(/\γ/g,"&gamma;");
+	i=i.replace(/\δ/g,"&delta;");
+	i=i.replace(/\ε/g,"&epsilon;");
+	i=i.replace(/\ζ/g,"&zeta;");
+	i=i.replace(/\η/g,"&eta;");
+	i=i.replace(/\θ/g,"&theta;");
+	i=i.replace(/\ι/g,"&iota;");
+	i=i.replace(/\κ/g,"&kappa;");
+	i=i.replace(/\λ/g,"&lambda;");
+	i=i.replace(/\μ/g,"&mu;");
+	i=i.replace(/\ν/g,"&nu;");
+	i=i.replace(/\ξ/g,"&xi;");
+	i=i.replace(/\ο/g,"&omicron;");
+	i=i.replace(/\π/g,"&pi;");
+	i=i.replace(/\ρ/g,"&rho;");
+	i=i.replace(/\?/g,"&sigmaf;");
+	i=i.replace(/\σ/g,"&sigma;");
+	i=i.replace(/\τ/g,"&tau;");
+	i=i.replace(/\υ/g,"&upsilon;");
+	i=i.replace(/\φ/g,"&phi;");
+	i=i.replace(/\χ/g,"&chi;");
+	i=i.replace(/\ψ/g,"&psi;");
+	i=i.replace(/\ω/g,"&omega;");
+	i=i.replace(/\…/g,"&hellip;");
+	i=i.replace(/\′/g,"&prime;");
+	i=i.replace(/\″/g,"&Prime;");
+	i=i.replace(/\←/g,"&larr;");
+	i=i.replace(/\↑/g,"&uarr;");
+	i=i.replace(/\→/g,"&rarr;");
+	i=i.replace(/\↓/g,"&darr;");
+	i=i.replace(/\⇒/g,"&rArr;");
+	i=i.replace(/\⇔/g,"&hArr;");
+	i=i.replace(/\∀/g,"&forall;");
+	i=i.replace(/\∂/g,"&part;");
+	i=i.replace(/\∃/g,"&exist;");
+	i=i.replace(/\∇/g,"&nabla;");
+	i=i.replace(/\∈/g,"&isin;");
+	i=i.replace(/\∋/g,"&ni;");
+	i=i.replace(/\∑/g,"&sum;");
+	i=i.replace(/\√/g,"&radic;");
+	i=i.replace(/\∝/g,"&prop;");
+	i=i.replace(/\∞/g,"&infin;");
+	i=i.replace(/\∠/g,"&ang;");
+	i=i.replace(/\∧/g,"&and;");
+	i=i.replace(/\∨/g,"&or;");
+	i=i.replace(/\∩/g,"&cap;");
+	i=i.replace(/\∪/g,"&cup;");
+	i=i.replace(/\∫/g,"&int;");
+	i=i.replace(/\∴/g,"&there4;");
+	i=i.replace(/\≠/g,"&ne;");
+	i=i.replace(/\≡/g,"&equiv;");
+	i=i.replace(/\⊂/g,"&sub;");
+	i=i.replace(/\⊃/g,"&sup;");
+	i=i.replace(/\⊆/g,"&sube;");
+	i=i.replace(/\⊇/g,"&supe;");
+	i=i.replace(/\⊥/g,"&perp;");
+i=i.replace(/\é/g,"&eacute;");
+i=i.replace(/\á/g,"&aacute;");
+i=i.replace(/\ú/g,"&uacute;");
+i=i.replace(/\í/g,"&iacute;");
+i=i.replace(/\ó/g,"&oacute;");
+i=i.replace(/\œ/g,"&oelig;");
+i=i.replace(/\Œ/g,"&OElig;");
+i=i.replace(/\É/g,"&Eacute;");
+i=i.replace(/\Á/g,"&Aacute;");
+i=i.replace(/\Ú/g,"&Uacute;");
+i=i.replace(/\Í/g,"&Iacute;");
+i=i.replace(/\Ó/g,"&Oacute;");
+i=i.replace(/\è/g,"&egrave;");
+i=i.replace(/\à/g,"&agrave;");
+i=i.replace(/\ù/g,"&ugrave;");
+i=i.replace(/\ì/g,"&igrave;");
+i=i.replace(/\ò/g,"&ograve;");
+i=i.replace(/\ç/g,"&ccedil;");
+i=i.replace(/\Ç/g,"&Ccedil;");
+i=i.replace(/\È/g,"&Egrave;");
+i=i.replace(/\À/g,"&Agrave;");
+i=i.replace(/\Ù/g,"&Ugrave;");
+i=i.replace(/\Ì/g,"&Igrave;");
+i=i.replace(/\Ò/g,"&Ograve;");
+i=i.replace(/\ê/g,"&ecirc;");
+i=i.replace(/\â/g,"&acirc;");
+i=i.replace(/\û/g,"&ucirc;");
+i=i.replace(/\î/g,"&icirc;");
+i=i.replace(/\ô/g,"&ocirc;");
+i=i.replace(/\«/g,"&laquo;");
+i=i.replace(/\€/g,"&euro;");
+i=i.replace(/\Ê/g,"&Ecirc;");
+i=i.replace(/\Â/g,"&Acirc;");
+i=i.replace(/\Û/g,"&Ucirc;");
+i=i.replace(/\Î/g,"&Icirc;");
+i=i.replace(/\Ô/g,"&Ocirc;");
+i=i.replace(/\ë/g,"&euml;");
+i=i.replace(/\ä/g,"&auml;");
+i=i.replace(/\ü/g,"&uuml;");
+i=i.replace(/\ï/g,"&iuml;");
+i=i.replace(/\ö/g,"&ouml;");
+i=i.replace(/\»/g,"&raquo;");
+i=i.replace(/\Ë/g,"&Euml;");
+i=i.replace(/\Ä/g,"&Auml;");
+i=i.replace(/\Ü/g,"&Uuml;");
+i=i.replace(/\Ï/g,"&Iuml;");
+i=i.replace(/\Ö/g,"&Ouml;");}
+
+	if (document.forms.INPUT3.elements.ChR10.checked){//十進数文字参照化
+	for(var n = 0; n < i.length; n++) j += ("&#"+(i.charCodeAt(n))+";");
+		if (document.forms.INPUT3.elements.ChRCRLF.checked){
+		i = j;
+		}else{
+		var rn = j.replace(/&#13;&#10;/g,'\r\n');
+		var r = rn.replace(/&#13;/g,'\r');
+		var n = r.replace(/&#10;/g,'\n');
+		i = n;	}}
+	if (document.forms.INPUT3.elements.ChR16.checked){//16進数文字参照化
+	for(var n = 0; n < i.length; n++) j += ("&#x"+(i.charCodeAt(n)).toString('16')+";");
+		if (document.forms.INPUT3.elements.ChRCRLF.checked){
+		i = j;
+		}else{
+		var xdxa = j.replace(/&#xd;&#xa;/g,'\r\n');
+		var xd = xdxa.replace(/&#xd;/g,'\r');
+		var xa = xd.replace(/&#xa;/g,'\n');
+		i = xa;	}}
+	if (document.forms.INPUT3.elements.ChrPunc.checked){//句読点を除外
+	i=i.replace(/&#12290;|&#x3002;/g,'。');
+	i=i.replace(/&#12289;|&#x3001;/g,'、');
+	i=i.replace(/&#65294;|&#xff0e;/g,'，');
+	i=i.replace(/&#65292;|&#xff0c;/g,'，');
+	i=i.replace(/&#46;|&#x2e;/g,'.');
+	i=i.replace(/&#44;|&#x2c;/g,',');
+	i=i.replace(/&#65281;|&#xff01;/g,'！');
+	i=i.replace(/&#65311;|&#xff1f;/g,'？');
+	i=i.replace(/&#33;|&#x21;/g,'!');
+	i=i.replace(/&#63;|&#x3f;/g,'?');
+	}
+
+//自由文字列置換
+var rep1 = document.forms.INPUT3.elements.rep1.value;
+var rep2 = document.forms.INPUT3.elements.rep2.value;
+	i=i.replace(rep1,rep2);
+var rep3 = document.forms.INPUT3.elements.rep3.value;
+var rep4 = document.forms.INPUT3.elements.rep4.value;
+	i=i.replace(rep3,rep4);
+var rep5 = document.forms.INPUT3.elements.rep5.value;
+var rep6 = document.forms.INPUT3.elements.rep6.value;
+	i=i.replace(rep5,rep6);
+var rep7 = document.forms.INPUT3.elements.rep7.value;
+var rep8 = document.forms.INPUT3.elements.rep8.value;
+	i=i.replace(rep7,rep8);
+
+document.forms.INPUT3.elements.OUT2.value=i;//結果を表示
+}
+
+function change(){//テキストを入れ替え
+var i =document.forms.INPUT3.elements.INPUT4.value;
+var j=document.forms.INPUT3.elements.OUT2.value;
+document.forms.INPUT3.elements.INPUT4.value=j;
+document.forms.INPUT3.elements.OUT2.value = i;}
+
+function Disp(id){
+	if(document.getElementById(id).style.display == 'block')
+	{document.getElementById(id).style.display = 'none';}
+	else{document.getElementById(id).style.display = 'block';}
+}
+//-->
+</script>
+<form id="INPUT3" name="INPUT3" action="#">
+<textarea accesskey="I" tabindex="01" name="INPUT4" id="INPUT4" rows="10" cols="80" onfocus="if(this.value=='　変換したい文字列をここへ'){this.value=''};">　変換したい文字列をここへ</textarea>
+<div class="case">
+<div class="menu"><a href="JavaScript:Disp('Spa');" title="空白文字（改行コードを除く）に関する処理を表示します">空白処理　</a>
+<div id="Spa" class="menu2">
+<label title="改行を除く全ての空白を削除します"><input type="checkbox" id="SPACE" name="sp">全ての空白を削除</label><br>
+<label title="各行の最初と最後の空白（改行コードを除く）を削除します"><input type="checkbox" id="SPACE2" name="sp">行頭行末の空白を削除</label><br>
+<label title="連続する空白を一文字に短縮します"><input type="checkbox" id="SPACE3" name="sp">空白の連続を削除</label><br>
+<label title="全てのタブ文字を削除します"><input type="checkbox" id="SPACE7" name="sp">タブを削除</label><br>
+<label title="空白の長さを倍にします"><input type="checkbox" id="SPACE6" name="sp">空白を拡げる</label><br>
+</div></div>
+
+<div class="menu"><a href="JavaScript:Disp('Spa2');">空白変換　</a>
+<div id="Spa2" class="menu2">
+<label title="タブ文字を通常の半角空白に置き換えます"><input type="checkbox" id="SPACE5" name="sp">タブ文字を半角化</label><br>
+<label title="通常の半角空白をタブ文字に置き換えます"><input type="checkbox" id="Tab" name="sp">半角空白をタブ化</label><br>
+<label title="全角空白文字（和字間隔）を半角空白文字（欧字間隔）に置き換えます"><input type="checkbox" id="SPACE4" name="sp">全角空白を半角化</label><br>
+<label title="全ての半角空白をノーブレークスペースに置き換えます"><input type="checkbox" id="SPACE8" name="sp">半角空白を&amp;nbsp;</label><br>
+<label title="タブ文字をエリア内に入力した文字に置き換えます">タブを<textarea rows="1" cols="5" id="Tabtex"  wrap="off"></textarea>に</label><br>
+</div></div>
+
+<div class="menu"><a href="JavaScript:Disp('Kai');" title="改行コードに関する処理を表示します">改行処理　</a>
+<div id="Kai" class="menu2">
+<label title="全ての改行コードを削除します"><input type="checkbox" id="CRLF" name="cr">改行を削除</label><br>
+<label title="何も入力されていない空の行を削除します"><input type="checkbox" id="CRLF2" name="cr">空行の削除</label><br>
+<label title="全ての改行に改行コードを付与（空行を挿入）します"><input type="checkbox" id="CRLF3" name="cr">行間を拡げる</label><br>
+</div></div>
+
+<div class="menu"><a href="JavaScript:Disp('Han');" title="全角・半角、大文字・小文字などに関する処理を表示します。">字種変換　</a>
+<div id="Han" class="menu2">
+<label title="全角アルファベットと句読点を半角に置き換えます"><input type="checkbox" id="HF" name="cr">ＡＢＣ→ABC</label><br>
+<label title="全角数字を半角に置き換えます"><input type="checkbox" id="HF2" name="cr">１２３→123</label><br>
+<label title="＆！？～などの全角の記号文字を半角に変換します"><input type="checkbox" id="HF3" name="cr">記号文字を半角化</label><br>
+<label title="全てのアルファベットを小文字に変換します"><input type="checkbox" id="Lower" name="cr">小文字化</label><br>
+<label title="全てのアルファベットを大文字に変換します"><input type="checkbox" id="Upper" name="cr">大文字化</label><br>
+<label title="全角の丸テン式の句読点を全角のピリオド・カンマに変換します"><input type="checkbox" id="Punc" name="cr">。、→．，</label><br>
+</div></div>
+
+
+<div class="menu"><a href="JavaScript:Disp('Chab');" title="特定の文字のみを実体参照する処理を表示します">実体参照　</a>
+<div id="Chab" class="menu2">
+<label title="<>や&といったHTML特殊文字のみを実体参照に置き換えます"><input type="checkbox" id="META" name="cr">HTMLメタ文字を実体参照</label><br>
+<label title="アクサン記号やギリシャ文字、数学記号、論理記号などを実体参照に置き換えます"><input type="checkbox" id="kigo" name="cr">アクサンや記号を実体参照</label><br>
+</div></div>
+
+<div class="menu"><a href="JavaScript:Disp('Cha');" title="文章全体を数値文字参照する処理を表示します">数値参照</a>
+<div id="Cha" class="menu2">
+<label><input type="radio" id="ChRoff" name="characterReference" checked>数値文字参照化しない</label><br>
+<label title="全文を10進数の数値文字参照に置き換えます"><input type="radio" id="ChR10" name="characterReference">10進数の数値文字参照化</label><br>
+<label title="全文を16進数の数値文字参照に置き換えます"><input type="radio" id="ChR16" name="characterReference">16進数の数値文字参照化</label><br>
+<label title="改行コードも数値文字参照に置き換えます"><input type="checkbox" id="ChRCRLF" name="ChRCRLF">改行も変換</label><br>
+<label title="句読点を数値文字参照の対象から除外します"><input type="checkbox" id="ChrPunc" name="ChrPunc">句読点を除外</label><br>
+</div>
+</div>
+
+<div class="case"><a href="JavaScript:Disp('Rep');" title="上欄の文字列と一致する文字列を下欄の文字列と置き換えます（最初に一致した文字列のみ変換します">自由文字列置換</a>
+<div class="menu2" id="Rep">
+<div class="menu">
+<textarea rows="1" cols="12" id="rep1"  wrap="off"></textarea>　<br>
+　↑を↓に置換<br>
+<textarea rows="1" cols="12" id="rep2"  wrap="off"></textarea><br>
+</div>
+<div class="menu">
+<textarea rows="1" cols="12" id="rep3"  wrap="off"></textarea>　<br>
+　　↓<br>
+<textarea rows="1" cols="12" id="rep4"  wrap="off"></textarea><br>
+</div>
+<div class="menu">
+<textarea rows="1" cols="12" id="rep5"  wrap="off"></textarea>　<br>
+　　↓<br>
+<textarea rows="1" cols="12" id="rep6"  wrap="off"></textarea><br>
+</div>
+<div class="menu">
+<textarea rows="1" cols="12" id="rep7"  wrap="off"></textarea><br>
+　　↓<br>
+<textarea rows="1" cols="12" id="rep8"  wrap="off"></textarea><br>
+</div>
+*最初に一致した文字列だけを変換します。<br><br>
+</div></div>
+
+<div class="case">
+　　<input type="button" value="変換を実行" onclick="convert()" onkeypress="convert()" title="左上の項目から順に処理を実行します。">　　
+<input type="reset" value="リセット">　　<input type="button" value="↓↑入れ替え" onclick="change()" onkeypress="change()" title="上段と下段のテキストを入れ替えます">
+</div>
+<p><textarea accesskey="O" tabindex="05" rows="10" cols="80" name="OUT2" id="OUT2">　ここに結果が出ます</textarea></p>
+</div></form><br>
+・使い方<br>
+左上の選択肢から順に文字列を処理します。<br>
+各選択肢にカーソルを合わせると説明が表示されます。<br><br><br>
+</div>
+</body></html>
